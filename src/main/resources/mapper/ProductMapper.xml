@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.schedulesendmaildemo.mapper.ProductMapper" >
+    <!--<cache />-->
+    <resultMap id="BaseResultMap" type="com.example.schedulesendmaildemo.entity.Product" >
+        <id column="id" property="id" />
+        <result column="code" property="code" />
+        <result column="name" property="name" />
+        <result column="quantity" property="quantity" />
+        <result column="category_id" property="category_id" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,code, name, quantity, category_id
+    </sql>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        *
+        from tb_product
+    </select>
+
+    <select id="getById" resultMap="BaseResultMap">
+        select *
+        from tb_product
+        where  tb_product.id = #{id}
+    </select>
+
+    <select id="getIdsByQuantity" resultType="java.lang.Long">
+        select id
+        from tb_product
+        where  tb_product.quantity <![CDATA[ < ]]>  10
+    </select>
+</mapper>

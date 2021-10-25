@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.schedulesendmaildemo.mapper.EmailRecordMapper" >
+    <!--<cache />-->
+    <resultMap id="BaseResultMap" type="com.example.schedulesendmaildemo.entity.EmailRecord" >
+        <id column="id" property="id" />
+        <result column="send_to" property="sendTo"/>
+        <result column="send_by" property="sendBy" />
+        <result column="content" property="content" />
+        <result column="send_date" property="sendDate" />
+        <result column="status" property="status" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,code, name
+    </sql>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from tb_email_record
+    </select>
+    <select id="getById" resultMap="BaseResultMap">
+        select *
+        from tb_email_record
+        where  tb_email_record.id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.example.schedulesendmaildemo.entity.EmailRecord">
+        insert into tb_email_record (send_to,content,send_date,status)
+        values (#{sendTo}, #{content}, #{sendDate}, #{status})
+    </insert>
+
+</mapper>
