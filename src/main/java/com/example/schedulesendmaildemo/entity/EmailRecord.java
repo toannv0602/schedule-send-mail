@@ -12,10 +12,14 @@ import java.util.Date;
 @Getter
 @Setter
 public class EmailRecord {
+
     private Long id;
+
     private String sendTo;
 
     private String content;
+
     private Date sendDate;
+
     private String status;
 }

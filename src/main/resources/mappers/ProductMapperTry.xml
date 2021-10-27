@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.schedulesendmaildemo.mapper.ProductMapperTry" >
+    <!--<cache />-->
+    <resultMap id="BaseResultMap" type="ProductReponse" >
+        <id column="id" property="id"  />
+        <result column="code" property="code"/>
+        <result column="name" property="name"/>
+        <result column="quantity" property="quantity" />
+        <association property="category" resultMap="CategoryResultMap"/>
+        <!--One-on-one-->
+<!--        <association property="category"  javaType="com.example.schedulesendmaildemo.entity.Category" >-->
+<!--            <id property="id" column="cat_id"/>-->
+<!--            <result property="code" column="code"/>-->
+<!--            <result property="name" column="name"/>-->
+<!--        </association>-->
+    </resultMap>
+
+    <resultMap id="CategoryResultMap" type="Category">
+        <id property="id" column="id_cat"/>
+        <result property="code" column="code_cat"/>
+        <result property="name" column="name_cat"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        tb_product.id,tb_product.code, tb_product.name, quantity, tb_category.id , tb_category.code , tb_category.name
+    </sql>
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+            tb_product.*, tb_category.*
+        from tb_product, tb_category
+        where tb_product.categoty_id = tb_category.id
+    </select>
+    <select id="getById" resultMap="BaseResultMap">
+        select tb_product.*, tb_category.id as id_cat , tb_category.code as code_cat , tb_category.name as name_cat
+        from tb_product, tb_category
+        where  tb_product.id = #{id} and tb_product.categoty_id = tb_category.id
+    </select>
+    
+    
+</mapper>

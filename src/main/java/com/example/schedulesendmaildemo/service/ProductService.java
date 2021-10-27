@@ -12,4 +12,8 @@ public interface ProductService {
     List<ProductReponse> findAll();
 
     List<ProductReponse> getByQuantity();
+
+    ProductReponse getByIdTest(Long id);
+
+    List<ProductReponse> finAllTest();
 }

@@ -8,9 +8,15 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Product {
+
     private Long id;
+
     private String code;
+
     private String name;
+
     private Integer quantity;
-    private Long category_id;
+
+    private Long categoryId;
+
 }

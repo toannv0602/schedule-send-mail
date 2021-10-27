@@ -40,17 +40,19 @@ public class EmailServiceImpl {
 
     public void senEmail(User user, List<ProductReponse> proReponses) {
         String emailContent ="";
+        Date dateSend = new Date();
         try {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
             helper.setSubject("GROOO SHOP MALL NOTIFICATION");
             helper.setTo(user.getEmail());
-            emailContent = getEmailContent(proReponses);
+
+            emailContent = getEmailContent(proReponses,dateSend);
             helper.setText(emailContent, true);
             javaMailSender.send(mimeMessage);
-            record(user.getEmail(), emailContent, ErrorEnum.SUCCESS.toString());
+            record(user.getEmail(), emailContent, ErrorEnum.SUCCESS.toString(),dateSend);
         }catch (Exception e){
-            record(user.getEmail(), emailContent, ErrorEnum.FAILED.toString());
+            record(user.getEmail(), emailContent, ErrorEnum.FAILED.toString(),dateSend);
         }
 
     }
@@ -64,20 +66,20 @@ public class EmailServiceImpl {
 //        helper.setText(emailContent, true);
 //        javaMailSender.send(mimeMessage);
 //    }
-    String getEmailContent(List<ProductReponse> proReponseList) throws IOException, TemplateException {
+    String getEmailContent(List<ProductReponse> proReponseList, Date date) throws IOException, TemplateException {
         StringWriter stringWriter = new StringWriter();
         Map<String, Object> model = new HashMap<>();
         model.put("proReponseList", proReponseList);
-        model.put("time", dateFormat.format(new Date()));
+        model.put("time", dateFormat.format(date));
         configuration.getTemplate("email.ftlh").process(model, stringWriter);
         return stringWriter.getBuffer().toString();
     }
 
-    public void record(String sendTo,String content,String status){
+    public void record(String sendTo,String content,String status, Date date){
         EmailRecord emailRecord = new EmailRecord();
         emailRecord.setContent(content);
         emailRecord.setSendTo(sendTo);
-        emailRecord.setSendDate(new Date());
+        emailRecord.setSendDate(date);
         emailRecord.setStatus(status);
         emailRecordMapper.insert(emailRecord);
     }

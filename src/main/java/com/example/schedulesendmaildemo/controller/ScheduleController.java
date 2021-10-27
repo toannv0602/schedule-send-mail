@@ -15,10 +15,6 @@ import java.io.IOException;
 @RequestMapping("/schedule")
 public class ScheduleController {
 
-    private static final String SCHEDULED_TASKS = "scheduledTasks";
-
-    private ScheduledAnnotationBeanPostProcessor postProcessor;
-
     @Autowired
     private ScheduledTasks scheduledTasks;
 

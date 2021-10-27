@@ -4,6 +4,7 @@ import com.example.schedulesendmaildemo.entity.Category;
 import com.example.schedulesendmaildemo.entity.Product;
 import com.example.schedulesendmaildemo.mapper.CategoryMapper;
 import com.example.schedulesendmaildemo.mapper.ProductMapper;
+import com.example.schedulesendmaildemo.mapper.ProductMapperTry;
 import com.example.schedulesendmaildemo.reponse.ProductReponse;
 import com.example.schedulesendmaildemo.service.ProductService;
 import com.example.schedulesendmaildemo.shedule.ScheduledTasks;
@@ -19,16 +20,19 @@ public class ProductServiceImpl implements ProductService {
 
 
 
-    @Resource
+    @Autowired
     private ProductMapper productMapper;
 
-    @Resource
+    @Autowired
     private CategoryMapper categoryMapper;
+
+    @Autowired
+    private ProductMapperTry productMapperTry;
 
     @Override
     public ProductReponse getById(Long id) {
         Product product = productMapper.getById(id);
-        Category category = categoryMapper.getById(product.getCategory_id());
+        Category category = categoryMapper.getById(product.getCategoryId());
         ProductReponse reponse = new ProductReponse();
         reponse.setId(product.getId());
         reponse.setCode(product.getCode());
@@ -44,7 +48,7 @@ public class ProductServiceImpl implements ProductService {
         List<ProductReponse> productReponses = new ArrayList<>();
         for (Product product : products){
             ProductReponse reponse = new ProductReponse();
-            Category category = categoryMapper.getById(product.getCategory_id());
+            Category category = categoryMapper.getById(product.getCategoryId());
             reponse.setId(product.getId());
             reponse.setCode(product.getCode());
             reponse.setName(product.getName());
@@ -77,5 +81,15 @@ public class ProductServiceImpl implements ProductService {
            productReponses.add(proReponse);
         }
         return productReponses;
+    }
+
+    @Override
+    public ProductReponse getByIdTest(Long id) {
+        return productMapperTry.getById(id);
+    }
+
+    @Override
+    public List<ProductReponse> finAllTest() {
+        return productMapperTry.findAll();
     }
 }

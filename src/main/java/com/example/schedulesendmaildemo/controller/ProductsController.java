@@ -1,6 +1,7 @@
 package com.example.schedulesendmaildemo.controller;
 
 import com.example.schedulesendmaildemo.entity.User;
+import com.example.schedulesendmaildemo.mapper.ProductMapperTry;
 import com.example.schedulesendmaildemo.reponse.ProductReponse;
 import com.example.schedulesendmaildemo.service.ProductService;
 import com.example.schedulesendmaildemo.service.impl.EmailServiceImpl;
@@ -22,6 +23,7 @@ public class ProductsController {
         @Autowired
         private EmailServiceImpl emailService;
 
+
         @GetMapping("/{id}")
         public ProductReponse getById( @PathVariable(name = "id") Long id){
             return productService.getById(id);
@@ -33,6 +35,16 @@ public class ProductsController {
         @GetMapping("/get-by-quantity")
         public List<ProductReponse> getByQuantity(){
                 return productService.getByQuantity();
+        }
+
+        @GetMapping("/test/{id}")
+        public ProductReponse getByIdTest(@PathVariable(name = "id") Long id){
+               return productService.getByIdTest(id);
+        }
+
+        @GetMapping("/test/findall")
+        public List<ProductReponse> getByIdTest(){
+                return productService.finAllTest();
         }
 
 //        @GetMapping("/test")

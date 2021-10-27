@@ -37,13 +37,13 @@ public class ScheduledTasks {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
     private static final Logger log =LoggerFactory.getLogger(ScheduledTasks.class);
 
-    public static Boolean active = true;
+    public static Boolean active = false;
 //    @Scheduled(fixedRate = 600000)// ms
 //    public void reportCurrentTime() {
 //        if(active) log.info("The time is now {}", dateFormat.format(new Date()));
 //    }
 
-    @Scheduled(fixedRate = 60000)// ms
+    @Scheduled(fixedRateString = "${schedule.email.fixedRate}")// ms
     public void quantityNotificationByEmail () throws MessagingException, TemplateException, IOException {
         if(active){
             List<ProductReponse> proList = productService.getByQuantity();
