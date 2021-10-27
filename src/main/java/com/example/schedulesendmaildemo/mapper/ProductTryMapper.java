@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 @Mapper
-public interface ProductMapperTry {
+public interface ProductTryMapper {
 
     ProductReponse getById(@Param("id") Long id);
 

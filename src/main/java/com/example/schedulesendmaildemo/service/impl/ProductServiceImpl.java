@@ -4,14 +4,12 @@ import com.example.schedulesendmaildemo.entity.Category;
 import com.example.schedulesendmaildemo.entity.Product;
 import com.example.schedulesendmaildemo.mapper.CategoryMapper;
 import com.example.schedulesendmaildemo.mapper.ProductMapper;
-import com.example.schedulesendmaildemo.mapper.ProductMapperTry;
+import com.example.schedulesendmaildemo.mapper.ProductTryMapper;
 import com.example.schedulesendmaildemo.reponse.ProductReponse;
 import com.example.schedulesendmaildemo.service.ProductService;
-import com.example.schedulesendmaildemo.shedule.ScheduledTasks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
     private CategoryMapper categoryMapper;
 
     @Autowired
-    private ProductMapperTry productMapperTry;
+    private ProductTryMapper productMapperTry;
 
     @Override
     public ProductReponse getById(Long id) {
@@ -59,17 +57,6 @@ public class ProductServiceImpl implements ProductService {
         return productReponses;
     }
 
-//    @Override
-//    public List<ProductReponse> getByQuantity() {
-//        List<Long> ids = productMapper.getIdsByQuantity();
-//        List<ProductReponse> productReponses = new ArrayList<>();
-//        for (Long id : ids){
-//           ProductReponse proReponse = getById(id);
-//           productReponses.add(proReponse);
-//        }
-//
-//        return productReponses;
-//    }
 
 
     @Override

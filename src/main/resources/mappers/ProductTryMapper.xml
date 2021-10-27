@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.example.schedulesendmaildemo.mapper.ProductMapperTry" >
+<mapper namespace="com.example.schedulesendmaildemo.mapper.ProductTryMapper" >
     <!--<cache />-->
     <resultMap id="BaseResultMap" type="ProductReponse" >
         <id column="id" property="id"  />
@@ -8,12 +8,6 @@
         <result column="name" property="name"/>
         <result column="quantity" property="quantity" />
         <association property="category" resultMap="CategoryResultMap"/>
-        <!--One-on-one-->
-<!--        <association property="category"  javaType="com.example.schedulesendmaildemo.entity.Category" >-->
-<!--            <id property="id" column="cat_id"/>-->
-<!--            <result property="code" column="code"/>-->
-<!--            <result property="name" column="name"/>-->
-<!--        </association>-->
     </resultMap>
 
     <resultMap id="CategoryResultMap" type="Category">
